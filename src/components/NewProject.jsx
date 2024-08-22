@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Button } from "./Button";
 import Input from "./Input";
+import { toast } from "react-toastify";
 
 export function NewProject({ onAdd }) {
   const titleRef = useRef();
@@ -11,6 +12,18 @@ export function NewProject({ onAdd }) {
     const enteredTitle = titleRef.current.value;
     const enteredDescription = descriptionRef.current.value;
     const enteredDueDate = dueDateRef.current.value;
+
+    const isEmptyInput =
+      enteredTitle.trim() === "" ||
+      enteredDescription.trim() === "" ||
+      enteredDueDate.trim() === "";
+
+    if (isEmptyInput) {
+      toast.error(
+        "Please, make sure you provide a valid value for every input field."
+      );
+      return;
+    }
 
     onAdd({
       title: enteredTitle,

@@ -3,6 +3,8 @@ import { v4 as uuid } from "uuid";
 import { NewProject } from "./components/NewProject";
 import NoProjectSelected from "./components/NoProjectSelected";
 import { Sidebar } from "./components/Sidebar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [projects, setProjects] = useState({
@@ -11,6 +13,8 @@ function App() {
   });
   const uniqueId = uuid();
   const smallId = uniqueId.slice(0, 7);
+
+  const { selectedProjectId } = projects;
 
   const handleStartAddProject = () => {
     setProjects((prevState) => {
@@ -29,12 +33,11 @@ function App() {
       };
       return {
         ...prevState,
+        selectedProjectId: undefined,
         projects: [...prevState.projects, newProject],
       };
     });
   };
-
-  const { selectedProjectId } = projects;
 
   let content;
 
@@ -45,10 +48,16 @@ function App() {
   }
 
   return (
-    <main className="h-screen my-8 flex gap-8">
-      <Sidebar onStartAddProject={handleStartAddProject} />
-      {content}
-    </main>
+    <>
+      <main className="h-screen my-8 flex gap-8">
+        <Sidebar
+          onStartAddProject={handleStartAddProject}
+          projects={projects.projects}
+        />
+        {content}
+      </main>
+      <ToastContainer />
+    </>
   );
   u;
 }

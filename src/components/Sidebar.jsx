@@ -1,6 +1,6 @@
 import { Button } from "./Button";
 
-export function Sidebar({ onStartAddProject }) {
+export function Sidebar({ onStartAddProject, projects }) {
   return (
     <aside className="bg-slate-900 text-slate-50 w-1/3 px-8 py-16 ,md:w-72 rounded-r-xl">
       <h2 className="mb-8 uppercase font-bold md:text-xl text-slate-200">
@@ -14,7 +14,15 @@ export function Sidebar({ onStartAddProject }) {
           + Add Project
         </Button>
       </div>
-      <ul></ul>
+      <ul className="mt-8 space-y-1">
+        {projects.map((project) => (
+          <li key={project.id}>
+            <Button className="px-2 py-1 w-full text-left rounded-sm text-slate-400 hover:text-slate-200 hover:bg-slate-800">
+              {project.title}
+            </Button>
+          </li>
+        ))}
+      </ul>
     </aside>
   );
 }
