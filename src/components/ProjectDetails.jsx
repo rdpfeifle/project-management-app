@@ -1,4 +1,5 @@
 import { Button } from "./Button";
+import { Tasks } from "./Tasks";
 
 export function ProjectDetails({ project, onDelete }) {
   const { title, description, dueDate } = project;
@@ -24,7 +25,7 @@ export function ProjectDetails({ project, onDelete }) {
         <p className="mb-4 text-slate-400">{formattedDate}</p>
         <p className="text-slate-600 whitespace-pre-wrap">{description}</p>
       </header>
-      TASKS
+      <Tasks />
     </div>
   );
 }
