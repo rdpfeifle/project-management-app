@@ -1,3 +1,4 @@
+import { Button } from "./Button";
 import { Input } from "./Input";
 
 export function NewProject() {
@@ -5,14 +6,14 @@ export function NewProject() {
     <div className="w-[35rem] mt-16">
       <menu className="flex items-center justify-end gap-4 my-4">
         <li>
-          <button className="text-slate-800 hover:text-slate-950">
+          <Button className="text-slate-800 hover:text-slate-950">
             Cancel
-          </button>
+          </Button>
         </li>
         <li>
-          <button className="px-6 py-2 rounded-md bg-slate-800 text-slate-50 hover:bg-slate-950">
+          <Button className="px-6 py-2 rounded-md bg-slate-800 text-slate-50 hover:bg-slate-950">
             Save
-          </button>
+          </Button>
         </li>
       </menu>
       <div>
