@@ -58,11 +58,25 @@ function App() {
     });
   };
 
+  const handleDeleteProject = () => {
+    setProjects((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: prevState.projects.filter(
+          (project) => project.id !== prevState.selectedProjectId
+        ),
+      };
+    });
+  };
+
   const selectedProject = projects.projects.find(
     (project) => project.id === selectedProjectId
   );
 
-  let content = <ProjectDetails project={selectedProject} />;
+  let content = (
+    <ProjectDetails project={selectedProject} onDelete={handleDeleteProject} />
+  );
 
   if (selectedProjectId === null) {
     content = (

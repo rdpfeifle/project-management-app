@@ -1,6 +1,6 @@
 import { Button } from "./Button";
 
-export function ProjectDetails({ project }) {
+export function ProjectDetails({ project, onDelete }) {
   const { title, description, dueDate } = project;
 
   const formattedDate = new Date(dueDate).toLocaleDateString("en-US", {
@@ -14,7 +14,10 @@ export function ProjectDetails({ project }) {
       <header className="pb-4 mb-4 border-b-2 border-slate-300">
         <div className="flex items-center justify-between">
           <h1 className="mb-2 text-3xl font-bold text-slate-600">{title}</h1>
-          <Button className="text-slate-600 hover:text-slate-950">
+          <Button
+            className="text-slate-600 hover:text-slate-950"
+            onClick={onDelete}
+          >
             Delete
           </Button>
         </div>
