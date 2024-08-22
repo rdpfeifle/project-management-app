@@ -3,7 +3,7 @@ import { Button } from "./Button";
 import Input from "./Input";
 import { toast } from "react-toastify";
 
-export function NewProject({ onAdd }) {
+export function NewProject({ onAdd, onCancel }) {
   const titleRef = useRef();
   const descriptionRef = useRef();
   const dueDateRef = useRef();
@@ -36,7 +36,10 @@ export function NewProject({ onAdd }) {
     <div className="w-[35rem] mt-16">
       <menu className="flex items-center justify-end gap-4 my-4">
         <li>
-          <Button className="text-slate-800 hover:text-slate-950">
+          <Button
+            className="text-slate-800 hover:text-slate-950"
+            onClick={onCancel}
+          >
             Cancel
           </Button>
         </li>
