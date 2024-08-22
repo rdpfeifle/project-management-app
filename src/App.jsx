@@ -3,6 +3,7 @@ import { v4 as uuid } from "uuid";
 import { NewProject } from "./components/NewProject";
 import NoProjectSelected from "./components/NoProjectSelected";
 import { Sidebar } from "./components/Sidebar";
+import { ProjectDetails } from "./components/ProjectDetails";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,6 +16,15 @@ function App() {
   const smallId = uniqueId.slice(0, 7);
 
   const { selectedProjectId } = projects;
+
+  const handleSelectProject = (id) => {
+    setProjects((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: id,
+      };
+    });
+  };
 
   const handleStartAddProject = () => {
     setProjects((prevState) => {
@@ -48,7 +58,11 @@ function App() {
     });
   };
 
-  let content;
+  const selectedProject = projects.projects.find(
+    (project) => project.id === selectedProjectId
+  );
+
+  let content = <ProjectDetails project={selectedProject} />;
 
   if (selectedProjectId === null) {
     content = (
@@ -64,6 +78,7 @@ function App() {
         <Sidebar
           onStartAddProject={handleStartAddProject}
           projects={projects.projects}
+          onSelectProject={handleSelectProject}
         />
         {content}
       </main>
