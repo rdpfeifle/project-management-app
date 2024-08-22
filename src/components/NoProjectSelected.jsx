@@ -1,7 +1,7 @@
 import noProjectsImg from "../assets/no-projects.png";
 import { Button } from "./Button";
 
-export default function NoProjectSelected() {
+export default function NoProjectSelected({ onStartAddProject }) {
   return (
     <div className="my-24 text-center w-2/3">
       <img
@@ -16,7 +16,10 @@ export default function NoProjectSelected() {
         Select an existing project or create a new one.
       </p>
       <p className="mt-8">
-        <Button className="text-slate-400 bg-slate-700 py-2 px-4 rounded-md text-xs md:text-base hover:bg-slate-600 hover:text-slate-100">
+        <Button
+          className="text-slate-400 bg-slate-700 py-2 px-4 rounded-md text-xs md:text-base hover:bg-slate-600 hover:text-slate-100"
+          onClick={onStartAddProject}
+        >
           Create new project
         </Button>
       </p>
