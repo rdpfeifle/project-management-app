@@ -19,7 +19,7 @@ export function Tasks({ tasks, onAdd, onDelete }) {
                 <span>{task.text}</span>
                 <Button
                   className="text-slate-700 hover:text-red-500"
-                  onClick={onDelete}
+                  onClick={() => onDelete(task.taskId)}
                 >
                   Clear
                 </Button>
