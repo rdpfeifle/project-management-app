@@ -11,6 +11,7 @@ function App() {
   const [projects, setProjects] = useState({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
   const uniqueId = uuid();
   const smallId = uniqueId.slice(0, 7);
@@ -70,12 +71,34 @@ function App() {
     });
   };
 
+  const handleAddTask = (text) => {
+    setProjects((prevState) => {
+      const newTask = {
+        text: text,
+        projectId: prevState.selectedProjectId,
+        taskId: smallId,
+      };
+      return {
+        ...prevState,
+        tasks: [...prevState.tasks, newTask],
+      };
+    });
+  };
+
+  const handleDeleteTask = (id) => {};
+
   const selectedProject = projects.projects.find(
     (project) => project.id === selectedProjectId
   );
 
   let content = (
-    <ProjectDetails project={selectedProject} onDelete={handleDeleteProject} />
+    <ProjectDetails
+      project={selectedProject}
+      onDelete={handleDeleteProject}
+      onAddTask={handleAddTask}
+      onDeleteTask={handleDeleteTask}
+      tasks={projects.tasks}
+    />
   );
 
   if (selectedProjectId === null) {

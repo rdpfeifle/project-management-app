@@ -1,7 +1,13 @@
 import { Button } from "./Button";
 import { Tasks } from "./Tasks";
 
-export function ProjectDetails({ project, onDelete }) {
+export function ProjectDetails({
+  project,
+  onDelete,
+  tasks,
+  onAddTask,
+  onDeleteTask,
+}) {
   const { title, description, dueDate } = project;
 
   const formattedDate = new Date(dueDate).toLocaleDateString("en-US", {
@@ -25,7 +31,7 @@ export function ProjectDetails({ project, onDelete }) {
         <p className="mb-4 text-slate-400">{formattedDate}</p>
         <p className="text-slate-600 whitespace-pre-wrap">{description}</p>
       </header>
-      <Tasks />
+      <Tasks onAdd={onAddTask} onDelete={onDeleteTask} tasks={tasks} />
     </div>
   );
 }
