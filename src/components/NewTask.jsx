@@ -1,14 +1,21 @@
 import { useState } from "react";
 import { Button } from "./Button";
+import { toast } from "react-toastify";
 
 export function NewTask({ onAdd }) {
-  const [enteredTask, setEnteredTask] = useState();
+  const [enteredTask, setEnteredTask] = useState("");
 
   const handleChange = (e) => {
-    setEnteredTask(e.target.value);
+    const value = e.target.value;
+    value.trim() !== "" && setEnteredTask(value);
   };
 
   const handleClick = () => {
+    if (enteredTask.trim() === "") {
+      toast.error("Task cannot be empty.");
+      return;
+    }
+
     onAdd(enteredTask);
     setEnteredTask("");
   };
