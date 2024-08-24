@@ -1,9 +1,11 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { Context } from "../store/context";
 import { Button } from "./Button";
 import Input from "./Input";
 import { toast } from "react-toastify";
 
-export function NewProject({ onAdd, onCancel }) {
+export function NewProject() {
+  const { addProject, cancelAddProject } = useContext(Context);
   const titleRef = useRef();
   const descriptionRef = useRef();
   const dueDateRef = useRef();
@@ -25,7 +27,7 @@ export function NewProject({ onAdd, onCancel }) {
       return;
     }
 
-    onAdd({
+    addProject({
       title: enteredTitle,
       description: enteredDescription,
       dueDate: enteredDueDate,
@@ -38,7 +40,7 @@ export function NewProject({ onAdd, onCancel }) {
         <li>
           <Button
             className="text-slate-800 hover:text-slate-950"
-            onClick={onCancel}
+            onClick={cancelAddProject}
           >
             Cancel
           </Button>

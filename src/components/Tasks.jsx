@@ -1,11 +1,14 @@
+import { useContext } from "react";
+import { Context } from "../store/context";
 import { Button } from "./Button";
 import { NewTask } from "./NewTask";
 
-export function Tasks({ tasks, onAdd, onDelete }) {
+export function Tasks() {
+  const { tasks, deleteTask } = useContext(Context);
   return (
     <section className="space-y-4">
       <h2 className="text-2xl font-bold text-slate-700">Tasks</h2>
-      <NewTask onAdd={onAdd} />
+      <NewTask />
       {tasks.length === 0 && (
         <p className="text-slate-800">
           This project does not have any tasks yet.
@@ -19,7 +22,7 @@ export function Tasks({ tasks, onAdd, onDelete }) {
                 <span>{task.text}</span>
                 <Button
                   className="text-slate-700 hover:text-red-500"
-                  onClick={() => onDelete(task.taskId)}
+                  onClick={() => deleteTask(task.taskId)}
                 >
                   Clear
                 </Button>
