@@ -1,13 +1,10 @@
+import { useContext } from "react";
+import { Context } from "../store/context";
 import { Button } from "./Button";
 import { Tasks } from "./Tasks";
 
-export function ProjectDetails({
-  project,
-  onDelete,
-  tasks,
-  onAddTask,
-  onDeleteTask,
-}) {
+export function ProjectDetails({ project }) {
+  const { deleteProject } = useContext(Context);
   const { title, description, dueDate } = project;
 
   const formattedDate = new Date(dueDate).toLocaleDateString("en-US", {
@@ -23,7 +20,7 @@ export function ProjectDetails({
           <h1 className="mb-2 text-3xl font-bold text-slate-600">{title}</h1>
           <Button
             className="text-slate-600 hover:text-slate-950"
-            onClick={onDelete}
+            onClick={deleteProject}
           >
             Delete
           </Button>
@@ -31,7 +28,7 @@ export function ProjectDetails({
         <p className="mb-4 text-slate-400">{formattedDate}</p>
         <p className="text-slate-600 whitespace-pre-wrap">{description}</p>
       </header>
-      <Tasks onAdd={onAddTask} onDelete={onDeleteTask} tasks={tasks} />
+      <Tasks />
     </div>
   );
 }

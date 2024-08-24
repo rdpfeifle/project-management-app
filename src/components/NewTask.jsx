@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "../store/context";
 import { Button } from "./Button";
 import { toast } from "react-toastify";
 
-export function NewTask({ onAdd }) {
+export function NewTask() {
   const [enteredTask, setEnteredTask] = useState("");
+  const { addTask } = useContext(Context);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -16,7 +18,7 @@ export function NewTask({ onAdd }) {
       return;
     }
 
-    onAdd(enteredTask);
+    addTask(enteredTask);
     setEnteredTask("");
   };
 

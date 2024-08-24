@@ -1,11 +1,11 @@
+import { useContext } from "react";
+import { Context } from "../store/context";
 import { Button } from "./Button";
 
-export function Sidebar({
-  onStartAddProject,
-  projects,
-  onSelectProject,
-  selectedProjectId,
-}) {
+export function Sidebar() {
+  const { selectedProjectId, projects, startAddProject, selectProject } =
+    useContext(Context);
+
   return (
     <aside className="bg-slate-900 text-slate-50 w-1/3 px-8 py-16 ,md:w-72 rounded-r-xl">
       <h2 className="mb-8 uppercase font-bold md:text-xl text-slate-200">
@@ -14,7 +14,7 @@ export function Sidebar({
       <div>
         <Button
           className="text-slate-400 bg-slate-700 py-2 px-4 rounded-md text-xs md:text-base hover:bg-slate-600 hover:text-slate-100"
-          onClick={onStartAddProject}
+          onClick={startAddProject}
         >
           + Add Project
         </Button>
@@ -34,7 +34,7 @@ export function Sidebar({
             <li key={project.id}>
               <Button
                 className={cssClasses}
-                onClick={() => onSelectProject(project.id)}
+                onClick={() => selectProject(project.id)}
               >
                 {project.title}
               </Button>
