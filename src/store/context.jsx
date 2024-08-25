@@ -4,7 +4,6 @@ import { v4 as uuid } from "uuid";
 export const Context = createContext({
   selectedProjectId: undefined,
   projects: [],
-  tasks: [],
   selectProject: () => {},
   startAddProject: () => {},
   cancelAddProject: () => {},
@@ -35,6 +34,7 @@ function projectsReducer(state, action) {
       const newProject = {
         ...action.projectData,
         id: action.id,
+        tasks: [],
       };
       return {
         ...state,
@@ -52,12 +52,15 @@ function projectsReducer(state, action) {
     case "ADD_TASK":
       const newTask = {
         text: action.text,
-        projectId: action.selectedProjectId,
         taskId: action.taskId,
       };
       return {
         ...state,
-        tasks: [...state.tasks, newTask],
+        projects: state.projects.map((project) =>
+          project.id === action.selectedProjectId
+            ? { ...project, tasks: [...project.tasks, newTask] }
+            : project
+        ),
       };
     case "DELETE_TASK":
       return {
@@ -104,8 +107,13 @@ export function ContextProvider({ children }) {
     });
   };
 
-  const handleAddTask = (text) => {
-    dispatch({ type: "ADD_TASK", text, taskId: smallId });
+  const handleAddTask = (text, projectId) => {
+    dispatch({
+      type: "ADD_TASK",
+      selectedProjectId: projectId,
+      taskId: smallId,
+      text,
+    });
   };
 
   const handleDeleteTask = (id) => {
@@ -115,7 +123,6 @@ export function ContextProvider({ children }) {
   const contextValue = {
     selectedProjectId: state.selectedProjectId,
     projects: state.projects,
-    tasks: state.tasks,
     selectProject: handleSelectProject,
     startAddProject: handleStartAddProject,
     cancelAddProject: handleCancelAddProject,
