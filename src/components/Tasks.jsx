@@ -29,7 +29,7 @@ export function Tasks() {
                 <span>{task.text}</span>
                 <Button
                   className="text-slate-700 hover:text-red-500"
-                  onClick={() => deleteTask(task.taskId)}
+                  onClick={() => deleteTask(selectedProjectId, task.taskId)}
                 >
                   Clear
                 </Button>
