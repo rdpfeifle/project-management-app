@@ -65,7 +65,16 @@ function projectsReducer(state, action) {
     case "DELETE_TASK":
       return {
         ...state,
-        tasks: state.tasks.filter((task) => task.taskId !== action.taskId),
+        projects: state.projects.map((project) =>
+          project.id === action.selectedProjectId
+            ? {
+                ...project,
+                tasks: project.tasks.filter(
+                  (task) => task.taskId !== action.taskId
+                ),
+              }
+            : project
+        ),
       };
     default:
       throw new Error(`The action type ${action.type} wasn't handled.`);
@@ -116,8 +125,12 @@ export function ContextProvider({ children }) {
     });
   };
 
-  const handleDeleteTask = (id) => {
-    dispatch({ type: "DELETE_TASK", taskId: id });
+  const handleDeleteTask = (projectId, taskId) => {
+    dispatch({
+      type: "DELETE_TASK",
+      selectedProjectId: projectId,
+      taskId: taskId,
+    });
   };
 
   const contextValue = {
