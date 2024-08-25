@@ -4,7 +4,14 @@ import { Button } from "./Button";
 import { NewTask } from "./NewTask";
 
 export function Tasks() {
-  const { tasks, deleteTask } = useContext(Context);
+  const { projects, selectedProjectId, deleteTask } = useContext(Context);
+
+  const selectedProject = projects.find(
+    (project) => project.id === selectedProjectId
+  );
+
+  const { tasks } = selectedProject;
+
   return (
     <section className="space-y-4">
       <h2 className="text-2xl font-bold text-slate-700">Tasks</h2>
