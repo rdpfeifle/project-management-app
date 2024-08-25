@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 export function NewTask() {
   const [enteredTask, setEnteredTask] = useState("");
-  const { addTask } = useContext(Context);
+  const { addTask, selectedProjectId } = useContext(Context);
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -18,7 +18,7 @@ export function NewTask() {
       return;
     }
 
-    addTask(enteredTask);
+    addTask(enteredTask, selectedProjectId);
     setEnteredTask("");
   };
 
